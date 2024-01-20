@@ -1,5 +1,6 @@
 //
 // Copyright (C) 2020 IOTech Ltd
+// Copyright (C) 2023 Schneider Electric
 //
 // SPDX-License-Identifier: Apache-2.0
 
@@ -7,11 +8,14 @@ package handlers
 
 import (
 	"context"
+	"os"
+	"strings"
 	"sync"
 	"time"
 
 	bootstrapInterfaces "github.com/edgexfoundry/edgex-go/internal/pkg/bootstrap/interfaces"
 	"github.com/edgexfoundry/edgex-go/internal/pkg/db"
+	"github.com/edgexfoundry/edgex-go/internal/pkg/infrastructure/hybrid"
 	"github.com/edgexfoundry/edgex-go/internal/pkg/infrastructure/redis"
 	"github.com/edgexfoundry/edgex-go/internal/pkg/interfaces"
 
@@ -51,6 +55,17 @@ func (d Database) newDBClient(
 	databaseInfo := d.database.GetDatabaseInfo()
 	switch databaseInfo.Type {
 	case "redisdb":
+		dbhybrid := os.Getenv("HYBRID")
+		if strings.ToUpper(dbhybrid) == "TRUE" {
+			return hybrid.NewHybridClient(
+				db.Configuration{
+					Host:     databaseInfo.Host,
+					Port:     databaseInfo.Port,
+					Password: credentials.Password,
+					Timeout:  databaseInfo.Timeout,
+				},
+				lc)
+		}
 		return redis.NewClient(
 			db.Configuration{
 				Host:     databaseInfo.Host,
