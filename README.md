@@ -1,3 +1,5 @@
+<meta name="google-site-verification" content="WSvJ6DuzPFQtHQYufhTx0oztV0OAVPTwcp8w4knQgqs" />
+
 # Core-data with Influx DB
 Please refer the documentation of https://github.com/edgexfoundry/edgex-go for any details/licencing of edgex-go
 
@@ -53,7 +55,8 @@ influxdb:
    The usename is 'admin'. In secured mode the redis password is used to secure the influx db as well. So the password can be recovered from secret store as explained inside the link https://docs.edgexfoundry.org/3.0/security/Ch-SecretStore/#:~:text=is%20true.-,Using%20the%20Vault%20CLI,-Execute%20a%20shell
 
     In unsecured mode the password is "admin1234".
-   
+
+
 
 [Apache-2.0](LICENSE)
 
