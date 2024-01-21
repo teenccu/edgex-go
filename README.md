@@ -7,7 +7,7 @@ This fork adds the implemenation of Core-data with InfluxDB and keeps the Core-M
 A Hybrid client is created which implements the metadata and core-data interface and re-uses the redis db implementation for core-metadata and adds influx db for core-data in the database implementation.
 All the core-data rest APIs are implemented and should work.
 
-The reason of this implementation is due to some limitations of redisdb being in memory consumption lot of memory when lots of datas pumped inside core-data.
+The reason of this implementation is due to some limitations of redisdb in memory consumption(being in memory database) when lots of datas pumped inside core-data.
 
 To activate influx inside core data 
 1. Clone the repository and build a local image of core-data with the current code
